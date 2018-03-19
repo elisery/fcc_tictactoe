@@ -1,0 +1,81 @@
+html {
+  font-size: 16px;
+  font-family: 'Indie Flower', cursive;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+}
+
+/*Universal styles*/
+.main-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+/*div {
+  border: 1px solid black;
+}*/
+
+body {
+}
+
+/*Main layout*/
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  padding-top: 10%;
+}
+
+.board {
+  width: 24rem;
+  height: 26rem;
+  background-color: #DEB887;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5%;
+}
+
+/*Top board controls & scores*/
+.settings {
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.scores {
+  margin-left: 2rem;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  color: #2F4F4F;
+}
+
+.controls {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.3rem;
+  color: #2F4F4F;
+}
+
+/*Playing board*/
+.play-area {
+  background-color: #2F4F4F;
+  background: radial-gradient(#2F4F4F, #1B3E3E, #0E3232);
+  margin: 0rem 1rem 1rem 1rem;
+  height: 21rem;
+  width: 21rem;
+}
