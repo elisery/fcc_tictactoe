@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <link href="./resources/css/reset.css" type="text/css" rel="stylesheet" />
     <link href="./resources/css/style.css" type="text/css" rel="stylesheet" />
+    <link href="./resources/images/favicon.ico" type="image/png" rel="icon" />
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <title>Tic Tac Elise-oe</title>
   </head>
   <body>
@@ -33,11 +35,67 @@
           <div class="controls">
             <button>Reset</button>
           </div>
-        </div>
+        </div> <!--Settings-->
+        <!--Intro screen-->
+        <!--div class="intro-screen chalkboard">
+          <div class="intro message">
+            <h2>How do you want to play?</h2>
+          </div>
+          <div class="options">
+            <button class="player-choice" id="1-player">1 Player</button>
+            <button class="player-choice" id="2-player">2 Players</button>
+          </div>
+        </div-->
+        <!--Token Selection Screen-->
+        <!--div class="token-select chalkboard">
+          <div class="message">
+            <h2>Are you an X or an O?</h2>
+          </div>
+          <div class="options">
+            <button class="token-choice" id="x-token">X&nbsp;</button>
+            <button class="token-choice" id="o-token">&nbsp;O</button>
+          </div>
+          <div class="options">
+            <button id="back"> <- back</button>
+          </div>
+        </div-->
         <!--Main playing area-->
-        <div class="play-area">
-        </div>
-      </div>
+        <div class="play-area chalkboard">
+          <div id="row-1" class="row bottom-border">
+            <div id="0" class="top-right-border square">
+              <p>X</p>
+            </div>
+            <div id="1" class="top-right-border square">
+              <p>X</p>
+            </div>
+            <div id="2" class="square">
+              <p>X</p>
+            </div>
+          </div>
+          <div id="row-2" class="row bottom-border">
+            <div id="3" class="right-border square">
+              <p>X</p>
+            </div>
+            <div id="4" class="right-border square">
+              <p>X</p>
+            </div>
+            <div id="5" class="square">
+              <p>X</p>
+            </div>
+          </div>
+          <div id="row-3" class="row">
+            <div id="6" class="bottom-right-border square">
+              <p>X</p>
+            </div>
+            <div id="7" class="bottom-right-border square">
+              <p>X</p>
+            </div>
+            <div id="8" class="square">
+              <p>X</p>
+            </div>
+          </div>
+        </div> <!--Play Area-->
+      </div> <!--Board-->
     </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" ></script>
   <script src="./js/script.js"></script>
