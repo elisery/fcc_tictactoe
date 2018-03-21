@@ -124,21 +124,26 @@ button {
 /*Intro screen*/
 .message {
   display: flex;
-  justify-content: center;
-  padding-top: 5rem;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
 }
 
 .options {
   display: flex;
-  justify-content: center;
-  margin-top: 2.5rem;
+  justify-content: space-around;
+  margin: 2.5rem;
 }
 
 .player-choice {
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
   font-family: 'Roboto', sans-serif;
   font-size: 1.4rem;
   border-style: dashed;
+}
+
+.player-choice:hover {
+  color: white;
 }
 
 /*Token Selection*/
@@ -148,8 +153,26 @@ button {
   font-size: 3.5rem;
 }
 
+#two-player-message {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
 #back {
   color: rgba(255, 255, 255, 0.4);
   font-family: 'Roboto', sans-serif;
   border-style: dashed;
+}
+
+#back:hover {
+  color: white;
+}
+
+#x-token:hover {
+  border: 1px dashed white;
+}
+
+#o-token:hover {
+  border: 0.1px dashed white;
 }

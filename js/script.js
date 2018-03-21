@@ -22,9 +22,40 @@ $(document).ready(function() {
   ];
 
   //PLAY AREA & TOKEN SCREEN HIDE
-  //PLAY AREA & INTRO hide
-  //INTRO & TOKEN HIDE 
-
-
+  $('.play-area').hide();
+  $('.token-select').hide();
+  $('.scores').hide();
+  $('.controls').hide();
+  //INTRO hide & TOKEN Select show
+  //One Player Game selected
+  $('#1-player').click(function() {
+    $('#two-player-message').hide();
+    $('.intro-screen').hide();
+    $('.token-select').fadeIn('slow');
+  });
+  //Two Player Game selected
+  $('#2-player').click(function() {
+    $('.intro-screen').hide();
+    $('.token-select').fadeIn('slow');
+  })
+  //INTRO & TOKEN HIDE
+  $('.token-choice').click(function() {
+    //RECORD TOKEN CHOICE HOW????
+    //Hide token screen & show play area
+    $('.token-select').hide();
+    $('.play-area').fadeIn('slow');
+    $('.scores').fadeIn('slow');
+    $('.controls').fadeIn('slow');
+  });
+  //Refresh page on back button click
+  $('#back').click(function() {
+    //LATER TRY TRANSITIONS IN AND OUT
+    location.reload();
+  });
+  //Refresh page on reset button click
+  $('#reset').click(function() {
+    //LATER TRY TRANSITIONS IN AND OUT
+    location.reload();
+  });
 
 }); //document ready
