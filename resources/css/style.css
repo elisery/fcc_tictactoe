@@ -80,6 +80,10 @@ body {
   color: #2F4F4F;
 }
 
+#score1, #score1num, #score2, #score2num {
+  display: inline;
+}
+
 .controls {
   margin-right: 2rem;
   display: flex;

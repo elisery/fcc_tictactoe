@@ -29,6 +29,8 @@ $(document).ready(function() {
   $('#2-player').click(function() {
     twoPlayers = true;
     onePlayer = false;
+    //change wording of scoreboard
+    $('#score2').text('player 2: ');
     $('.intro-screen').hide();
     $('.token-select').fadeIn('slow');
   })
@@ -91,7 +93,7 @@ $(document).ready(function() {
     }
     //call check for winner
     //call check for draw
-    //let other player or computer play 
+    //let other player or computer play
 
   });
 
