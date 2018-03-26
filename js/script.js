@@ -84,11 +84,8 @@ $(document).ready(function() {
   /*
   Functions:
   2. choose square for computer to click
-  4. check for winner
-  5. check for tie
   7. set scoreboard
   */
-  //prompt player1
 
   //Player clicks on square
   $('.square').click(function(e) {
@@ -110,13 +107,7 @@ $(document).ready(function() {
       //call win() to check for winner
       if (win()) {
         /*
-        1. change color of winning squares
-        2. place overlay on board w win message
-        3. reset board array
-        4. reset display by $('p').remove();
         5. update scoreboard
-        6. turn = playerOne
-        7. prompt playerOnes
         */
         console.log('YOU WIN IT WORKS!!');
         console.log(winningArr);
@@ -124,12 +115,14 @@ $(document).ready(function() {
           let selector = '#' + wa;
           $(selector).css('color', 'blue');
         });
+        $('.play-area').addClass('overlay');
         setTimeout(function() {
           winTasks();
         }, 2000);
       }
       //call draw() to check for tie game
       else if (draw()) {
+        $('.play-area').addClass('overlay');
         setTimeout(function() {
           drawTasks();
         }, 2000);
@@ -152,13 +145,6 @@ $(document).ready(function() {
 
   function win() {
     //return true if winner
-    /*
-    1. iterate board win combos
-      a) win combo array = indices, indice 1, indice 2, indice 3
-      b) compare indices to board indices
-        i) if all board[indices] === X or O
-        ii) return true
-    */
     let win = false;
     winningCombos.forEach(wc => {
       let index1 = wc[0];
@@ -185,10 +171,6 @@ $(document).ready(function() {
   function drawTasks() {
     /*
     1. place overlay on board w draw message
-    2. reset board array
-    3. reset display by $('p').remove();
-    4. turn = playerOne
-    5. prompt playerOne
     */
     board = [' ', ' ', ' ',
                  ' ', ' ', ' ',
@@ -196,6 +178,7 @@ $(document).ready(function() {
                 ];
     turn = 'playerOne';
     $('p').remove();
+    $('.play-area').removeClass('overlay');
   }
 
   function winTasks() {
@@ -206,6 +189,7 @@ $(document).ready(function() {
     turn = 'playerOne';
     $('p').remove();
     $('.square').css('color', 'rgba(255, 255, 255, 0.7)');
+    $('.play-area').removeClass('overlay');
     winningArr = [];
   }
 
