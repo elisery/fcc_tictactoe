@@ -13,12 +13,16 @@ $(document).ready(function() {
   let computer = '';
   let twoPlayers = false;
   let onePlayer = true;
+  let turn = 'playerOne';
+
   //PLAY AREA & TOKEN SCREEN HIDE
   $('.play-area').hide();
   $('.token-select').hide();
   $('.scores').hide();
   $('.controls').hide();
-  //INTRO hide & TOKEN Select show
+  //Turn signals hide
+  $('#player1-turn').hide();
+  $('#player2-turn').hide();
   //One Player Game selected
   $('#1-player').click(function() {
     $('#two-player-message').hide();
@@ -40,6 +44,8 @@ $(document).ready(function() {
     $('.play-area').fadeIn('slow');
     $('.scores').fadeIn('slow');
     $('.controls').fadeIn('slow');
+    //show prompt
+    $('#player1-turn').show();
   }
   //Player chooses 'X'
   $('#x-token').click(function() {
@@ -73,29 +79,88 @@ $(document).ready(function() {
     //LATER TRY TRANSITIONS IN AND OUT
     location.reload();
   });
+
   /*
   Functions:
   2. choose square for computer to click
-  3. check if square is empty or occupied
   4. check for winner
   5. check for tie
-  6. reset Functions
   7. set scoreboard
   */
-  //check if element is empty
+  //prompt player1
 
   //Player clicks on square
   $('.square').click(function(e) {
-    if ($(this).children(e).length === 0){
-      console.log($(this).children(e).length);
-      $(this).append('<p>' + player1 + '</p>');
-      console.log($(this).children(e).length);
+    let text;
+    if (turn === 'playerOne') {
+      text = player1;
+    } else {
+      text = player2;
     }
-    //call check for winner
-    //call check for draw
-    //let other player or computer play
+    if ($(this).children(e).length === 0){
 
+      console.log($(this).children(e).length);
+      $(this).append('<p>' + text + '</p>');
+
+      console.log($(this).children(e).length);
+      //set entry in play board array
+      board[$(this).attr('id')] = text;
+      console.log(board);
+    }
+    //call win() to check for winner
+    if (win()) {
+      /*
+      1. change background color & color of winning squares
+      2. place overlay on board w win message
+      3. reset board array
+      4. reset display
+      4. update scoreboard
+      */
+    }
+    //call draw() to check for tie game
+    else if (draw()) {
+      /*
+      1. place overlay on board w draw message
+      2. reset board array
+      3. reset display
+      */
+    } else {
+      if (turn === 'playerOne' && twoPlayers === true) {
+        $('#player1-turn').hide();
+        turn = 'playerTwo';
+        $('#player2-turn').show();
+      } else if (turn === 'playerTwo') {
+        $('#player2-turn').hide();
+        turn = 'playerOne';
+        $('#player1-turn').show();
+      } else {
+        $('#player1-turn').hide();
+        //CALL COMPUTER TURN 
+      }
+    }
+    //let other player or computer play
   });
 
+  function win() {
+    //return true if winner
+  }
+
+  function draw() {
+    //return true if no winner and turn_count = 9
+    if (win() === false && turn_count === 9) {
+      return true;
+    }
+    return false;
+  }
+
+  function turn_count() {
+    let counter = 0;
+    board.forEach(x => {
+      if (x === 'X' || x === 'O') {
+        counter++;
+      }
+    });
+    return counter;
+  }
 
 }); //document ready

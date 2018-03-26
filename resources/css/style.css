@@ -23,6 +23,13 @@ h2 {
   text-align: center;
 }
 
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  color: white;
+}
+
 .bottom-border {
   border-bottom: 2px solid rgba(255, 255, 255, 0.7);
 }
@@ -48,6 +55,7 @@ body {
 .container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   vertical-align: middle;
   padding-top: 10%;
@@ -62,6 +70,21 @@ body {
   align-items: center;
   flex-direction: column;
   border-radius: 5%;
+}
+
+/*Status*/
+.status {
+  display: flex;
+  justify-content: space-between;
+  width: 20rem;
+}
+
+#player1-turn {
+  background-color: #00CED1;
+}
+
+#player2-turn {
+  background-color: #B22222;
 }
 
 /*Top board controls & scores*/
