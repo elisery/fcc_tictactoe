@@ -14,6 +14,7 @@ $(document).ready(function() {
   let twoPlayers = false;
   let onePlayer = true;
   let turn = 'playerOne';
+  let winningArr = [];
 
   //PLAY AREA & TOKEN SCREEN HIDE
   $('.play-area').hide();
@@ -100,57 +101,112 @@ $(document).ready(function() {
     if ($(this).children(e).length === 0){
 
       console.log($(this).children(e).length);
-      $(this).append('<p>' + text + '</p>');
+      $(this).append('<p id="play">' + text + '</p>');
 
       console.log($(this).children(e).length);
       //set entry in play board array
       board[$(this).attr('id')] = text;
       console.log(board);
-    }
-    //call win() to check for winner
-    if (win()) {
-      /*
-      1. change background color & color of winning squares
-      2. place overlay on board w win message
-      3. reset board array
-      4. reset display
-      4. update scoreboard
-      */
-    }
-    //call draw() to check for tie game
-    else if (draw()) {
-      /*
-      1. place overlay on board w draw message
-      2. reset board array
-      3. reset display
-      */
-    } else {
-      if (turn === 'playerOne' && twoPlayers === true) {
-        $('#player1-turn').hide();
-        turn = 'playerTwo';
-        $('#player2-turn').show();
-      } else if (turn === 'playerTwo') {
-        $('#player2-turn').hide();
-        turn = 'playerOne';
-        $('#player1-turn').show();
+      //call win() to check for winner
+      if (win()) {
+        /*
+        1. change color of winning squares
+        2. place overlay on board w win message
+        3. reset board array
+        4. reset display by $('p').remove();
+        5. update scoreboard
+        6. turn = playerOne
+        7. prompt playerOnes
+        */
+        console.log('YOU WIN IT WORKS!!');
+        console.log(winningArr);
+        winningArr.forEach(wa => {
+          let selector = '#' + wa;
+          $(selector).css('color', 'blue');
+        });
+        setTimeout(function() {
+          winTasks();
+        }, 2000);
+      }
+      //call draw() to check for tie game
+      else if (draw()) {
+        setTimeout(function() {
+          drawTasks();
+        }, 2000);
       } else {
-        $('#player1-turn').hide();
-        //CALL COMPUTER TURN 
+        if (turn === 'playerOne' && twoPlayers === true) {
+          $('#player1-turn').hide();
+          turn = 'playerTwo';
+          $('#player2-turn').show();
+        } else if (turn === 'playerTwo') {
+          $('#player2-turn').hide();
+          turn = 'playerOne';
+          $('#player1-turn').show();
+        } else {
+          $('#player1-turn').hide();
+          //CALL COMPUTER TURN
+        }
       }
     }
-    //let other player or computer play
   });
 
   function win() {
     //return true if winner
+    /*
+    1. iterate board win combos
+      a) win combo array = indices, indice 1, indice 2, indice 3
+      b) compare indices to board indices
+        i) if all board[indices] === X or O
+        ii) return true
+    */
+    let win = false;
+    winningCombos.forEach(wc => {
+      let index1 = wc[0];
+      let index2 = wc[1];
+      let index3 = wc[2];
+      if ((board[index1] === 'X' && board[index2] === 'X' && board[index3] === 'X') ||
+          (board[index1] === 'O' && board[index2] === 'O' && board[index3] === 'O')) {
+        win = true;
+        winningArr = wc;
+      }
+    });
+    return win;
   }
 
   function draw() {
     //return true if no winner and turn_count = 9
-    if (win() === false && turn_count === 9) {
+    if (win() === false && turn_count() === 9) {
+      console.log('DRAW!');
       return true;
     }
     return false;
+  }
+
+  function drawTasks() {
+    /*
+    1. place overlay on board w draw message
+    2. reset board array
+    3. reset display by $('p').remove();
+    4. turn = playerOne
+    5. prompt playerOne
+    */
+    board = [' ', ' ', ' ',
+                 ' ', ' ', ' ',
+                 ' ', ' ', ' '
+                ];
+    turn = 'playerOne';
+    $('p').remove();
+  }
+
+  function winTasks() {
+    board = [' ', ' ', ' ',
+                 ' ', ' ', ' ',
+                 ' ', ' ', ' '
+                ];
+    turn = 'playerOne';
+    $('p').remove();
+    $('.square').css('color', 'rgba(255, 255, 255, 0.7)');
+    winningArr = [];
   }
 
   function turn_count() {
@@ -160,7 +216,12 @@ $(document).ready(function() {
         counter++;
       }
     });
+    console.log('turns ' + counter);
     return counter;
+  }
+
+  function computerPlay() {
+
   }
 
 }); //document ready
