@@ -98,7 +98,7 @@ $(document).ready(function() {
     if ($(this).children(e).length === 0){
 
       console.log($(this).children(e).length);
-      $(this).append('<p id="play">' + text + '</p>');
+      $(this).append('<p class="play">' + text + '</p>');
 
       console.log($(this).children(e).length);
       //set entry in play board array
@@ -115,17 +115,27 @@ $(document).ready(function() {
           let selector = '#' + wa;
           $(selector).css('color', 'blue');
         });
+        let winner;
+
+        if (turn === 'playerOne') {
+          winner = 'Player 1';
+        } else {
+          winner = 'Player 2';
+        }
+
         $('.play-area').addClass('overlay');
+        $('.overlay').append('<h3 id="win-message">You WIN ' + winner + '!</h3>');
         setTimeout(function() {
           winTasks();
-        }, 2000);
+        }, 3000);
       }
       //call draw() to check for tie game
       else if (draw()) {
         $('.play-area').addClass('overlay');
+        $('.overlay').append('<h3 id="draw-message">TIE game :)</h3>');
         setTimeout(function() {
           drawTasks();
-        }, 2000);
+        }, 3000);
       } else {
         if (turn === 'playerOne' && twoPlayers === true) {
           $('#player1-turn').hide();
@@ -179,6 +189,7 @@ $(document).ready(function() {
     turn = 'playerOne';
     $('p').remove();
     $('.play-area').removeClass('overlay');
+    $('#draw-message').remove();
   }
 
   function winTasks() {
@@ -190,6 +201,7 @@ $(document).ready(function() {
     $('p').remove();
     $('.square').css('color', 'rgba(255, 255, 255, 0.7)');
     $('.play-area').removeClass('overlay');
+    $('#win-message').remove();
     winningArr = [];
   }
 

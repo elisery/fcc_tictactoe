@@ -213,3 +213,27 @@ button {
 .overlay {
   opacity: 0.5;
 }
+
+#draw-message {
+  color: #FF1493;
+  margin-bottom: 4rem;
+  z-index: 20;
+  position: fixed;
+  top: 56%;
+  left: 43%;
+  right: 20%;
+  bottom: 50%;
+  font-size: 2rem;
+}
+
+#win-message {
+  color: #00FF00;
+  margin-bottom: 4rem;
+  z-index: 20;
+  position: fixed;
+  top: 56%;
+  left: 40%;
+  right: 20%;
+  bottom: 50%;
+  font-size: 2rem;
+}
