@@ -91,6 +91,10 @@ body {
   background-color: #B22222;
 }
 
+#computer-turn {
+  background-color: #7B68EE;
+}
+
 /*Top board controls & scores*/
 .settings {
   height: 3rem;

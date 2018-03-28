@@ -24,6 +24,7 @@ $(document).ready(function() {
   //Turn signals hide
   $('#player1-turn').hide();
   $('#player2-turn').hide();
+  $('#computer-turn').hide();
   //One Player Game selected
   $('#1-player').click(function() {
     $('#two-player-message').hide();
@@ -147,7 +148,9 @@ $(document).ready(function() {
           $('#player1-turn').show();
         } else {
           $('#player1-turn').hide();
+          $('#computer-turn').show();
           //CALL COMPUTER TURN
+          computerPlay();
         }
       }
     }
@@ -193,16 +196,29 @@ $(document).ready(function() {
   }
 
   function winTasks() {
+    //reset board
     board = [' ', ' ', ' ',
                  ' ', ' ', ' ',
                  ' ', ' ', ' '
                 ];
+    //update scoreboard
+    let scoreSelector;
+    if (turn === 'playerOne') {
+      scoreSelector = '#score1num';
+    } else {
+      scoreSelector = '#score2num';
+    }
+    let currentScore = $(scoreSelector).text();
+    currentScore++;
+    $(scoreSelector).text(currentScore);
+
+    //reset turn, playarea, colors and the winning array combo
     turn = 'playerOne';
     $('p').remove();
     $('.square').css('color', 'rgba(255, 255, 255, 0.7)');
     $('.play-area').removeClass('overlay');
     $('#win-message').remove();
-    winningArr = [];
+    winningArr = [];  
   }
 
   function turn_count() {
@@ -217,7 +233,13 @@ $(document).ready(function() {
   }
 
   function computerPlay() {
-
+    /*
+    1. iterate through winning combos to find ideal square
+    2. check if square empty
+    3. mark square
+    4. check for win or draw
+    4. update turn signal to show player 1 & hide computer turn
+    */
   }
 
 }); //document ready
