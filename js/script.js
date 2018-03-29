@@ -77,7 +77,6 @@ $(document).ready(function() {
   });
   //Refresh page on reset button click
   $('#reset').click(function() {
-    //LATER TRY TRANSITIONS IN AND OUT
     location.reload();
   });
 
@@ -107,7 +106,6 @@ $(document).ready(function() {
         } else {
           winner = 'Player 2';
         }
-
         $('.play-area').addClass('overlay');
         $('.overlay').append('<h3 id="win-message">You WIN ' + winner + '!</h3>');
         updateScores();
@@ -141,7 +139,6 @@ $(document).ready(function() {
           setTimeout(function() {
             computerPlay();
           }, 2000);
-
         }
       }
     }
