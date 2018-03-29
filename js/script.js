@@ -138,7 +138,7 @@ $(document).ready(function() {
           turn = 'computer';
           setTimeout(function() {
             computerPlay();
-          }, 2000);
+          }, 1000);
         }
       }
     }
@@ -223,11 +223,15 @@ $(document).ready(function() {
     let computerIndex;
     //if playerOne is not close to winning
     if (arrayToBlock === undefined) {
-      //if no squares are occupied, pick one
       winningCombos.forEach(wc => {
         let index1 = wc[0];
         let index2 = wc[1];
         let index3 = wc[2];
+        //if middle square is unoccupied claim it
+        if (board[4] === ' ') {
+          computerIndex = 4;
+          return;
+        }
         //if two are occupied pick the remaining
         if (board[index1] === computer && board[index2] === computer && board[index3] === ' ') {
           computerIndex = index3;
