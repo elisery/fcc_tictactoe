@@ -73,7 +73,7 @@ h3 {
   border-radius: 5%;
 }
 
-@media only screen and (max-width:800px)
+@media only screen and (max-width:600px)
  {
 /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   #draw-message {
