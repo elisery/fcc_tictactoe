@@ -74,14 +74,13 @@ h3 {
 }
 
 @media only screen and (max-width:800px)
-/*and (max-width: 1024px)*/
  {
 /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   #draw-message {
     margin-bottom: 4rem;
     z-index: 20;
     top: 52%;
-    left: 37%;
+    left: 35%;
     right: 20%;
     bottom: 50%;
     font-size: 2rem;
@@ -92,7 +91,7 @@ h3 {
     z-index: 20;
     position: fixed;
     top: 50%;
-    left: 37%;
+    left: 35%;
     right: 20%;
     bottom: 50%;
     font-size: 2rem;
