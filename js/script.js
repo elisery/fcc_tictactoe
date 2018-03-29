@@ -72,7 +72,6 @@ $(document).ready(function() {
   });
   //Refresh page on back button click
   $('#back').click(function() {
-    //LATER TRY TRANSITIONS IN AND OUT
     location.reload();
   });
   //Refresh page on reset button click
@@ -113,7 +112,6 @@ $(document).ready(function() {
           winTasks();
         }, 3000);
       }
-
       //call draw() to check for tie game
       else if (draw()) {
         $('.play-area').addClass('overlay');
