@@ -22,6 +22,7 @@ $(document).ready(function() {
   $('.scores').hide();
   $('.controls').hide();
   //Turn signals hide
+
   $('#player1-turn').hide();
   $('#player2-turn').hide();
   $('#computer-turn').hide();
@@ -82,12 +83,6 @@ $(document).ready(function() {
     location.reload();
   });
 
-  /*
-  Functions:
-  2. choose square for computer to click
-  7. set scoreboard
-  */
-
   //Player clicks on square
   $('.square').click(function(e) {
     let text;
@@ -105,11 +100,9 @@ $(document).ready(function() {
       //set entry in play board array
       board[$(this).attr('id')] = text;
       console.log(board);
+
       //call win() to check for winner
       if (win()) {
-        /*
-        5. update scoreboard
-        */
         console.log('YOU WIN IT WORKS!!');
         console.log(winningArr);
         winningArr.forEach(wa => {
@@ -130,6 +123,7 @@ $(document).ready(function() {
           winTasks();
         }, 3000);
       }
+
       //call draw() to check for tie game
       else if (draw()) {
         $('.play-area').addClass('overlay');
@@ -137,6 +131,7 @@ $(document).ready(function() {
         setTimeout(function() {
           drawTasks();
         }, 3000);
+        //else it is player 2 or computer's turn
       } else {
         if (turn === 'playerOne' && twoPlayers === true) {
           $('#player1-turn').hide();
@@ -150,7 +145,11 @@ $(document).ready(function() {
           $('#player1-turn').hide();
           $('#computer-turn').show();
           //CALL COMPUTER TURN
-          computerPlay();
+          turn = 'computer';
+          setTimeout(function() {
+            computerPlay();
+          }, 2000);
+
         }
       }
     }
@@ -182,9 +181,6 @@ $(document).ready(function() {
   }
 
   function drawTasks() {
-    /*
-    1. place overlay on board w draw message
-    */
     board = [' ', ' ', ' ',
                  ' ', ' ', ' ',
                  ' ', ' ', ' '
@@ -218,7 +214,7 @@ $(document).ready(function() {
     $('.square').css('color', 'rgba(255, 255, 255, 0.7)');
     $('.play-area').removeClass('overlay');
     $('#win-message').remove();
-    winningArr = [];  
+    winningArr = [];
   }
 
   function turn_count() {
@@ -240,6 +236,37 @@ $(document).ready(function() {
     4. check for win or draw
     4. update turn signal to show player 1 & hide computer turn
     */
+    let computerIndex;
+    winningCombos.forEach(wc => {
+      let index1 = wc[0];
+      let index2 = wc[1];
+      let index3 = wc[2];
+
+      //if at least one square in the winning combo is occupied by player 1
+      if (board[index1] === player1 || board[index2] === player1 || board[index3] === player1) {
+        //iterate through the combo and mark the empty square for the computer
+        if (board[index1] === ' ') {
+          computerIndex = index1;
+        } else if (board[index2] === ' ') {
+          computerIndex = index2;
+        } else {
+          computerIndex = index3;
+        }
+        return;
+      }
+
+    });
+    //mark the array
+    board[computerIndex] = computer;
+    //mark the playboard
+    let computerID = '#' + computerIndex;
+    $(computerID).append('<p class="play">' + computer + '</p>');
+    //check for win
+    //check for draw
+    //else
+    $('#player1-turn').show();
+    $('#computer-turn').hide();
+    turn = 'playerOne';
   }
 
 }); //document ready
