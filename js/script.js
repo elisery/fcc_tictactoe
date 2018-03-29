@@ -58,7 +58,6 @@ $(document).ready(function() {
     } else {
       computer = 'O';
     }
-    console.log('player1 ' + player1 + ' player2 ' + player2 + ' computer ' + computer);
     setPlayArea();
   });
   //Player chooses 'O'
@@ -69,7 +68,6 @@ $(document).ready(function() {
     } else {
       computer = 'X';
     }
-    console.log('player1 ' + player1 + ' player2 ' + player2 + ' computer ' + computer);
     setPlayArea();
   });
   //Refresh page on back button click
@@ -92,19 +90,12 @@ $(document).ready(function() {
       text = player2;
     }
     if ($(this).children(e).length === 0){
-
-      console.log($(this).children(e).length);
       $(this).append('<p class="play">' + text + '</p>');
-
-      console.log($(this).children(e).length);
       //set entry in play board array
       board[$(this).attr('id')] = text;
-      console.log(board);
 
       //call win() to check for winner
       if (win()) {
-        console.log('YOU WIN IT WORKS!!');
-        console.log(winningArr);
         winningArr.forEach(wa => {
           let selector = '#' + wa;
           $(selector).css('color', 'blue');
@@ -119,6 +110,7 @@ $(document).ready(function() {
 
         $('.play-area').addClass('overlay');
         $('.overlay').append('<h3 id="win-message">You WIN ' + winner + '!</h3>');
+        updateScores();
         setTimeout(function() {
           winTasks();
         }, 3000);
@@ -174,7 +166,6 @@ $(document).ready(function() {
   function draw() {
     //return true if no winner and turn_count = 9
     if (win() === false && turn_count() === 9) {
-      console.log('DRAW!');
       return true;
     }
     return false;
@@ -197,7 +188,18 @@ $(document).ready(function() {
                  ' ', ' ', ' ',
                  ' ', ' ', ' '
                 ];
-    //update scoreboard
+
+    //reset turn, playarea, colors and the winning array combo
+    $('p').remove();
+    $('.square').css('color', 'rgba(255, 255, 255, 0.7)');
+    $('.play-area').removeClass('overlay');
+    $('#win-message').remove();
+    winningArr = [];
+    turn = 'playerOne';
+  }
+
+  //update scoreboard
+  function updateScores() {
     let scoreSelector;
     if (turn === 'playerOne') {
       scoreSelector = '#score1num';
@@ -207,14 +209,6 @@ $(document).ready(function() {
     let currentScore = $(scoreSelector).text();
     currentScore++;
     $(scoreSelector).text(currentScore);
-
-    //reset turn, playarea, colors and the winning array combo
-    turn = 'playerOne';
-    $('p').remove();
-    $('.square').css('color', 'rgba(255, 255, 255, 0.7)');
-    $('.play-area').removeClass('overlay');
-    $('#win-message').remove();
-    winningArr = [];
   }
 
   function turn_count() {
@@ -224,49 +218,110 @@ $(document).ready(function() {
         counter++;
       }
     });
-    console.log('turns ' + counter);
     return counter;
   }
 
   function computerPlay() {
-    /*
-    1. iterate through winning combos to find ideal square
-    2. check if square empty
-    3. mark square
-    4. check for win or draw
-    4. update turn signal to show player 1 & hide computer turn
-    */
+    let arrayToBlock = closeToWin(player1);
     let computerIndex;
-    winningCombos.forEach(wc => {
-      let index1 = wc[0];
-      let index2 = wc[1];
-      let index3 = wc[2];
-
-      //if at least one square in the winning combo is occupied by player 1
-      if (board[index1] === player1 || board[index2] === player1 || board[index3] === player1) {
-        //iterate through the combo and mark the empty square for the computer
-        if (board[index1] === ' ') {
-          computerIndex = index1;
-        } else if (board[index2] === ' ') {
-          computerIndex = index2;
-        } else {
+    //if playerOne is not close to winning
+    if (arrayToBlock === undefined) {
+      //if no squares are occupied, pick one
+      winningCombos.forEach(wc => {
+        let index1 = wc[0];
+        let index2 = wc[1];
+        let index3 = wc[2];
+        //if two are occupied pick the remaining
+        if (board[index1] === computer && board[index2] === computer && board[index3] === ' ') {
           computerIndex = index3;
+          return;
+        } else if (board[index1] === computer && board[index2] === ' ' && board[index3] === computer) {
+          computerIndex = index2;
+          return;
+        } else if (board[index1] === ' ' && board[index2] === computer && board[index3] === computer) {
+          computerIndex = index1;
+          return;
         }
-        return;
-      }
-
-    });
+        //if one is occupied by computer pick the adjacent
+        if (board[index1] === ' ' && board[index2] === ' ' && board[index3] === computer) {
+          computerIndex = index2;
+          return;
+        } else if (board[index1] === ' ' && board[index2] === computer && board[index3] === ' ') {
+          computerIndex = index3;
+          return;
+        } else if (board[index1] === computer && board[index2] === ' ' && board[index3] === ' ') {
+          computerIndex = index2;
+          return;
+        }
+        //if one is occupied by player1 pick the adjacent
+        if (board[index1] === ' ' && board[index2] === ' ' && board[index3] === player1) {
+          computerIndex = index2;
+          return;
+        } else if (board[index1] === ' ' && board[index2] === player1 && board[index3] === ' ') {
+          computerIndex = index3;
+          return;
+        } else if (board[index1] === player1 && board[index2] === ' ' && board[index3] === ' ') {
+          computerIndex = index2;
+          return;
+        }
+        //if no squares are occupied, pick one
+        if (board[index1] === ' ' && board[index2] === ' ' && board[index3] === ' ') {
+          computerIndex = index3;
+          return;
+        }
+      });
+    } else {
+      //block playerOne from winning
+      arrayToBlock.forEach(i => {
+        if (board[i] === ' ') {
+          computerIndex = i;
+        }
+      });
+    }
     //mark the array
     board[computerIndex] = computer;
     //mark the playboard
     let computerID = '#' + computerIndex;
     $(computerID).append('<p class="play">' + computer + '</p>');
     //check for win
-    //check for draw
-    //else
-    $('#player1-turn').show();
+    if (win()) {
+      winningArr.forEach(wa => {
+        let selector = '#' + wa;
+        $(selector).css('color', 'blue');
+      });
+      let winner;
+      $('.play-area').addClass('overlay');
+      $('.overlay').append('<h3 id="win-message">Computer Wins!</h3>');
+      updateScores();
+      setTimeout(function() {
+        winTasks();
+      }, 3000);
+    }
+
     $('#computer-turn').hide();
+    $('#player1-turn').show();
     turn = 'playerOne';
+  }
+
+  function closeToWin(token) {
+    let blockCombo;
+    //if there is a winning combo with two squres marked with player1
+    //return that array combo
+    winningCombos.forEach(wc => {
+      let counter = 0;
+      wc.forEach(i => {
+        if (board[i] === token) {
+          counter++;
+        } else if (board[i] === computer) {
+          counter--;
+        }
+      });
+      if (counter === 2) {
+        blockCombo = wc;
+        return;
+      }
+    });
+    return blockCombo;
   }
 
 }); //document ready

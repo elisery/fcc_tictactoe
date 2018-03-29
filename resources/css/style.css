@@ -216,11 +216,11 @@ button {
 
 /*Overlay*/
 .overlay {
-  opacity: 0.5;
+  background: rgba(47, 79, 79, 0.6);
 }
 
 #draw-message {
-  color: #FF1493;
+  color: #1F0A64;
   margin-bottom: 4rem;
   z-index: 20;
   position: fixed;
@@ -232,12 +232,12 @@ button {
 }
 
 #win-message {
-  color: #00FF00;
+  color: #00FFFF;
   margin-bottom: 4rem;
   z-index: 20;
   position: fixed;
-  top: 52%;
-  left: 40%;
+  top: 50%;
+  left: 41%;
   right: 20%;
   bottom: 50%;
   font-size: 2rem;
