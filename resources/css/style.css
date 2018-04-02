@@ -77,24 +77,13 @@ h3 {
  {
 /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   #draw-message {
-    margin-bottom: 4rem;
-    z-index: 20;
-    top: 52%;
-    left: 35%;
-    right: 20%;
-    bottom: 50%;
-    font-size: 2rem;
+    left: 25%;
+    right: 40%;
   }
 
   #win-message {
-    margin-bottom: 4rem;
-    z-index: 20;
-    position: fixed;
-    top: 50%;
-    left: 35%;
-    right: 20%;
-    bottom: 50%;
-    font-size: 2rem;
+    left: 25%;
+    right: 40%;
   }
 }
 /*Status*/
